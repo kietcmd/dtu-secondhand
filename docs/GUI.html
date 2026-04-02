@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>DTU2nd — All Pages</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #F0F6FF;
+  --surface: #FFFFFF;
+  --primary: #1A8BE8;
+  --primary-soft: #DCEEFF;
+  --text: #0D1B2A;
+  --text-muted: #5A7090;
+  --border: #C8DDEF;
+  --tag-bg: #E4F1FF;
+  --green: #1A7A4F;
+  --green-soft: #D8F0E4;
+  --red: #E8341A;
+  --red-soft: #FDEAE6;
+  --amber: #D97706;
+  --amber-soft: #FEF3C7;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);}
+
+/* NAV TABS */
+.page-tabs{display:flex;gap:4px;padding:12px 20px;background:white;border-bottom:1px solid var(--border);flex-wrap:wrap;position:sticky;top:0;z-index:200;}
+.tab{padding:6px 14px;border-radius:20px;font-size:12px;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--text-muted);transition:.15s;}
+.tab.active{background:var(--primary);color:white;border-color:var(--primary);}
+.tab:hover:not(.active){border-color:var(--primary);color:var(--primary);}
+
+/* PAGE */
+.page{display:none;min-height:100vh;}
+.page.active{display:block;}
+
+/* HEADER */
+header{background:var(--primary);padding:10px 32px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:white;}
+.header-right{display:flex;gap:10px;align-items:center;}
+.btn-white{font-family:'Syne',sans-serif;font-weight:600;font-size:13px;padding:7px 16px;border-radius:8px;border:1.5px solid rgba(255,255,255,0.5);background:transparent;color:white;cursor:pointer;}
+.btn-solid{font-family:'Syne',sans-serif;font-weight:600;font-size:13px;padding:7px 16px;border-radius:8px;border:none;background:white;color:var(--primary);cursor:pointer;}
+nav{display:flex;background:white;border-bottom:1px solid var(--border);padding:0 24px;}
+nav a{font-family:'Syne',sans-serif;font-weight:600;font-size:14px;padding:12px 24px;color:var(--text-muted);border-bottom:2.5px solid transparent;cursor:pointer;text-decoration:none;}
+nav a.active{color:var(--primary);border-bottom-color:var(--primary);}
+
+/* LAYOUT */
+.layout{display:flex;max-width:1200px;margin:0 auto;padding:28px 24px;gap:28px;}
+.sidebar{width:220px;flex-shrink:0;}
+.main{flex:1;}
+
+/* CARDS */
+.card{background:white;border:1.5px solid var(--border);border-radius:14px;padding:20px;margin-bottom:16px;}
+.card:hover{box-shadow:0 4px 20px rgba(26,100,200,0.08);}
+
+/* BUTTONS */
+.btn-primary{background:var(--primary);color:white;border:none;padding:10px 20px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:600;font-size:14px;cursor:pointer;}
+.btn-secondary{background:white;color:var(--primary);border:1.5px solid var(--primary);padding:10px 20px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:600;font-size:14px;cursor:pointer;}
+.btn-danger{background:var(--red);color:white;border:none;padding:8px 16px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:600;font-size:13px;cursor:pointer;}
+.btn-success{background:var(--green);color:white;border:none;padding:8px 16px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:600;font-size:13px;cursor:pointer;}
+
+/* BADGE */
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;font-family:'Syne',sans-serif;}
+.badge-green{background:var(--green-soft);color:var(--green);}
+.badge-red{background:var(--red-soft);color:var(--red);}
+.badge-amber{background:var(--amber-soft);color:var(--amber);}
+.badge-blue{background:var(--primary-soft);color:var(--primary);}
+
+/* INPUT */
+.input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:white;outline:none;}
+.input:focus{border-color:var(--primary);}
+.label{font-size:13px;font-weight:500;color:var(--text-muted);margin-bottom:6px;display:block;}
+.form-group{margin-bottom:16px;}
+
+/* PRODUCT GRID */
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.product-card{background:white;border:1.5px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;transition:.2s;}
+.product-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(26,100,200,0.1);}
+.card-img{height:140px;background:var(--tag-bg);display:flex;align-items:center;justify-content:center;font-size:36px;position:relative;}
+.card-badge{position:absolute;top:8px;left:8px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;font-family:'Syne',sans-serif;}
+.card-body{padding:12px;}
+.card-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;margin-bottom:4px;}
+.card-price{color:var(--primary);font-weight:700;font-size:15px;font-family:'Syne',sans-serif;}
+.ai-ok{font-size:11px;color:#5B3FB5;background:#E8E0FF;padding:2px 7px;border-radius:20px;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;}
+th{text-align:left;padding:12px 16px;font-size:12px;font-family:'Syne',sans-serif;font-weight:700;color:var(--text-muted);border-bottom:1.5px solid var(--border);text-transform:uppercase;letter-spacing:.8px;}
+td{padding:12px 16px;font-size:14px;border-bottom:1px solid var(--border);}
+tr:hover td{background:var(--tag-bg);}
+
+/* STAT BOX */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+.stat{background:white;border:1.5px solid var(--border);border-radius:12px;padding:16px;}
+.stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--primary);}
+.stat-label{font-size:12px;color:var(--text-muted);margin-top:4px;}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.page.active > *{animation:fadeIn .3s ease both;}
+</style>
+</head>
+<body>
+
+<!-- PAGE TABS -->
+<div class="page-tabs">
+  <div class="tab" onclick="showPage('demand')">Demand</div>
+  <div class="tab" onclick="showPage('postdetail')">Post Detail</div>
+  <div class="tab" onclick="showPage('postmanage')">Quản lý tin</div>
+  <div class="tab" onclick="showPage('createpost')">Đăng tin</div>
+  <div class="tab" onclick="showPage('admin')">Admin</div>
+  <div class="tab" onclick="showPage('about')">About</div>
+  <div class="tab" onclick="showPage('login')">Đăng nhập</div>
+  <div class="tab" onclick="showPage('signup')">Đăng ký</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE: DEMAND -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="demand">
+  <header>
+    <div class="logo">DTU<span style="opacity:.7">2nd</span></div>
+    <div class="header-right"><button class="btn-white">Đăng nhập</button><button class="btn-solid">Đăng ký</button></div>
+  </header>
+  <nav>
+    <a>Feed</a><a class="active">Demand</a><a>Quản lý tin</a><a>About</a>
+  </nav>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="card" style="padding:16px">
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px">Danh mục</div>
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <div style="padding:8px 10px;border-radius:8px;background:var(--primary-soft);color:var(--primary);font-size:14px;font-weight:500">🛵 Xe cộ</div>
+          <div style="padding:8px 10px;border-radius:8px;font-size:14px;color:var(--text-muted)">📚 Sách</div>
+          <div style="padding:8px 10px;border-radius:8px;font-size:14px;color:var(--text-muted)">💻 Điện tử</div>
+          <div style="padding:8px 10px;border-radius:8px;font-size:14px;color:var(--text-muted)">👕 Quần áo</div>
+          <div style="padding:8px 10px;border-radius:8px;font-size:14px;color:var(--text-muted)">📦 Khác</div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main -->
+    <main class="main">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div>
+          <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px">Bảng nhu cầu <span style="color:var(--primary)">(47)</span></h1>
+          <p style="font-size:13px;color:var(--text-muted);margin-top:4px">Sinh viên đang tìm kiếm đồ</p>
+        </div>
+        <button class="btn-primary">+ Đăng nhu cầu</button>
+      </div>
+      <!-- Demand cards -->
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="card" style="display:flex;align-items:center;gap:16px">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🛵</div>
+          <div style="flex:1">
+            <div style="font-family:'Syne',sans-serif;font-weight:700">Cần mua xe đạp, khoảng 500k–800k</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:4px">Minh CNTT · 2 giờ trước</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--primary);font-size:16px">800.000đ</div>
+            <button class="btn-primary" style="padding:6px 14px;font-size:12px;margin-top:8px">Liên hệ</button>
+          </div>
+        </div>
+        <div class="card" style="display:flex;align-items:center;gap:16px">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">📚</div>
+          <div style="flex:1">
+            <div style="font-family:'Syne',sans-serif;font-weight:700">Tìm sách Giải tích 1 + Đại số tuyến tính DTU</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:4px">Hà K23 · 5 giờ trước</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--primary);font-size:16px">Thương lượng</div>
+            <button class="btn-primary" style="padding:6px 14px;font-size:12px;margin-top:8px">Liên hệ</button>
+          </div>
+        </div>
+        <div class="card" style="display:flex;align-items:center;gap:16px">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">💻</div>
+          <div style="flex:1">
+            <div style="font-family:'Syne',sans-serif;font-weight:700">Cần laptop i5 gen 10+ RAM 8GB, budget 6–8 triệu</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:4px">Tuấn K22 · 1 ngày trước</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--primary);font-size:16px">8.000.000đ</div>
+            <button class="btn-primary" style="padding:6px 14px;font-size:12px;margin-top:8px">Liên hệ</button>
+          </div>
+        </div>
+        <div class="card" style="display:flex;align-items:center;gap:16px">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🪑</div>
+          <div style="flex:1">
+            <div style="font-family:'Syne',sans-serif;font-weight:700">Tìm quạt điều hòa mini hoặc quạt đứng còn tốt</div>
+            <div style="font-size:13px;color:var(--text-muted);margin-top:4px">Lan K24 · 2 ngày trước</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--primary);font-size:16px">300.000đ</div>
+            <button class="btn-primary" style="padding:6px 14px;font-size:12px;margin-top:8px">Liên hệ</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE: POST DETAIL -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="postdetail">
+  <header>
+    <div class="logo">DTU<span style="opacity:.7">2nd</span></div>
+    <div class="header-right"><button class="btn-white">Đăng nhập</button><button class="btn-solid">Đăng ký</button></div>
+  </header>
+  <nav><a class="active">Feed</a><a>Demand</a><a>Quản lý tin</a><a>About</a></nav>
+  <div style="max-width:900px;margin:28px auto;padding:0 24px">
+    <div style="font-size:13px;color:var(--text-muted);margin-bottom:16px">← Quay lại Feed</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+      <!-- Image -->
+      <div>
+        <div style="background:var(--tag-bg);border-radius:16px;height:340px;display:flex;align-items:center;justify-content:center;font-size:80px">💻</div>
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <div style="background:var(--tag-bg);border-radius:8px;height:70px;width:70px;display:flex;align-items:center;justify-content:center;font-size:24px;border:2px solid var(--primary)">💻</div>
+          <div style="background:var(--tag-bg);border-radius:8px;height:70px;width:70px;display:flex;align-items:center;justify-content:center;font-size:24px">📦</div>
+          <div style="background:var(--tag-bg);border-radius:8px;height:70px;width:70px;display:flex;align-items:center;justify-content:center;font-size:24px">🔌</div>
+        </div>
+      </div>
+      <!-- Info -->
+      <div>
+        <div style="display:flex;gap:8px;margin-bottom:12px">
+          <span class="badge badge-blue">Điện tử</span>
+          <span class="badge badge-green">✨ Còn mới 95%</span>
+          <span style="font-size:11px;color:#5B3FB5;background:#E8E0FF;padding:3px 8px;border-radius:20px;font-weight:600">🤖 AI OK</span>
+        </div>
+        <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:24px;line-height:1.3;margin-bottom:12px">Laptop Dell Inspiron 15 i5 Gen 11 RAM 8GB SSD 256GB</h1>
+        <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--primary);margin-bottom:4px">8.500.000đ</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:20px">Giá gốc: <s>12.000.000đ</s></div>
+        <div class="card" style="padding:16px;margin-bottom:16px">
+          <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px">Mô tả</div>
+          <p style="font-size:14px;color:var(--text-muted);line-height:1.6">Laptop còn mới 95%, mua tháng 3/2024. Dùng để học, chưa sửa lần nào. Màn hình không trầy, bàn phím đầy đủ phím. Pin còn 80%. Kèm sạc zin.</p>
+        </div>
+        <!-- Seller -->
+        <div class="card" style="padding:16px;margin-bottom:16px;display:flex;align-items:center;gap:12px">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;font-size:20px">👤</div>
+          <div>
+            <div style="font-weight:600">An CNTT K22</div>
+            <div style="font-size:12px;color:var(--text-muted)">Đã xác minh @duytan.edu.vn</div>
+          </div>
+          <span class="badge badge-green" style="margin-left:auto">⭐ 4.9</span>
+        </div>
+        <div style="display:flex;gap:10px">
+          <button class="btn-primary" style="flex:1">Liên hệ người bán</button>
+          <button class="btn-secondary">Lưu tin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE: POST MANAGE -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="postmanage">
+  <header>
+    <div class="logo">DTU<span style="opacity:.7">2nd</span></div>
+    <div class="header-right"><div style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">👤</div></div>
+  </header>
+  <nav><a>Feed</a><a>Demand</a><a class="active">Quản lý tin</a><a>About</a></nav>
+  <div style="max-width:900px;margin:28px auto;padding:0 24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+      <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px">Tin đăng của tôi</h1>
+      <button class="btn-primary">+ Đăng tin mới</button>
+    </div>
+    <!-- Tabs -->
+    <div style="display:flex;gap:4px;margin-bottom:20px">
+      <div style="padding:6px 16px;border-radius:20px;background:var(--primary);color:white;font-size:13px;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer">Tất cả (5)</div>
+      <div style="padding:6px 16px;border-radius:20px;border:1.5px solid var(--border);color:var(--text-muted);font-size:13px;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer">Đang hiện (3)</div>
+      <div style="padding:6px 16px;border-radius:20px;border:1.5px solid var(--border);color:var(--text-muted);font-size:13px;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer">Chờ duyệt (1)</div>
+      <div style="padding:6px 16px;border-radius:20px;border:1.5px solid var(--border);color:var(--text-muted);font-size:13px;font-family:'Syne',sans-serif;font-weight:600;cursor:pointer">Từ chối (1)</div>
+    </div>
+    <!-- Table -->
+    <div class="card" style="padding:0;overflow:hidden">
+      <table>
+        <thead><tr><th>Sản phẩm</th><th>Giá</th><th>Trạng thái</th><th>Ngày đăng</th><th>Thao tác</th></tr></thead>
+        <tbody>
+          <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="font-size:24px">💻</div><div><div style="font-weight:600;font-size:13px">Laptop Dell i5 Gen 11</div><div style="font-size:12px;color:var(--text-muted)">Điện tử</div></div></div></td><td style="font-weight:600;color:var(--primary)">8.500.000đ</td><td><span class="badge badge-green">Đang hiện</span></td><td style="color:var(--text-muted);font-size:13px">30/03/2026</td><td><div style="display:flex;gap:6px"><button style="padding:5px 10px;border-radius:6px;border:1.5px solid var(--border);background:white;font-size:12px;cursor:pointer">Sửa</button><button class="btn-danger" style="padding:5px 10px;font-size:12px">Xóa</button></div></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="font-size:24px">🛵</div><div><div style="font-weight:600;font-size:13px">Xe đạp Giant ATX</div><div style="font-size:12px;color:var(--text-muted)">Xe cộ</div></div></div></td><td style="font-weight:600;color:var(--primary)">1.800.000đ</td><td><span class="badge badge-green">Đang hiện</span></td><td style="color:var(--text-muted);font-size:13px">28/03/2026</td><td><div style="display:flex;gap:6px"><button style="padding:5px 10px;border-radius:6px;border:1.5px solid var(--border);background:white;font-size:12px;cursor:pointer">Sửa</button><button class="btn-danger" style="padding:5px 10px;font-size:12px">Xóa</button></div></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="font-size:24px">📚</div><div><div style="font-weight:600;font-size:13px">Sách Giải tích DTU</div><div style="font-size:12px;color:var(--text-muted)">Sách</div></div></div></td><td style="font-weight:600;color:var(--primary)">85.000đ</td><td><span class="badge badge-amber">Chờ duyệt</span></td><td style="color:var(--text-muted);font-size:13px">01/04/2026</td><td><div style="display:flex;gap:6px"><button style="padding:5px 10px;border-radius:6px;border:1.5px solid var(--border);background:white;font-size:12px;cursor:pointer">Sửa</button><button class="btn-danger" style="padding:5px 10px;font-size:12px">Xóa</button></div></td></tr>
+          <tr><td><div style="display:flex;align-items:center;gap:10px"><div style="font-size:24px">📱</div><div><div style="font-weight:600;font-size:13px">iPhone 13 Pro Max</div><div style="font-size:12px;color:var(--text-muted)">Điện tử</div></div></div></td><td style="font-weight:600;color:var(--primary)">18.000.000đ</td><td><span class="badge badge-red">Từ chối</span></td><td style="color:var(--text-muted);font-size:13px">25/03/2026</td><td><div style="display:flex;gap:6px"><button style="padding:5px 10px;border-radius:6px;border:1.5px solid var(--border);background:white;font-size:12px;cursor:pointer">Xem lý do</button></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE: CREATE POST -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="createpost">
+  <header>
+    <div class="logo">DTU<span style="opacity:.7">2nd</span></div>
+    <div class="header-right"><div style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">👤</div></div>
+  </header>
+  <nav><a>Feed</a><a>Demand</a><a class="active">Quản lý tin</a><a>About</a></nav>
+  <div style="max-width:700px;margin:28px auto;padding:0 24px">
+    <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin-bottom:24px">Đăng tin mới</h1>
+    <div class="card">
+      <!-- Upload ảnh -->
+      <div class="form-group">
+        <label class="label">Ảnh sản phẩm *</label>
+        <div style="border:2px dashed var(--border);border-radius:12px;padding:32px;text-align:center;background:var(--tag-bg);cursor:pointer">
+          <div style="font-size:36px;margin-bottom:8px">📸</div>
+          <div style="font-weight:600;font-size:14px">Kéo thả hoặc click để tải ảnh</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px">AI sẽ tự động kiểm tra ảnh</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="label">Tiêu đề *</label>
+        <input class="input" placeholder="VD: Laptop Dell i5 còn mới 95%"/>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label class="label">Danh mục *</label>
+          <select class="input"><option>Chọn danh mục</option><option>Xe cộ</option><option>Điện tử</option><option>Sách</option><option>Quần áo</option><option>Đồ dùng</option></select>
+        </div>
+        <div class="form-group">
+          <label class="label">Giá (VNĐ) *</label>
+          <input class="input" placeholder="VD: 8500000"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="label">Tình trạng</label>
+        <div style="display:flex;gap:8px">
+          <div style="padding:8px 16px;border-radius:8px;background:var(--primary-soft);color:var(--primary);font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--primary)">Còn mới 95%+</div>
+          <div style="padding:8px 16px;border-radius:8px;border:1.5px solid var(--border);font-size:13px;font-weight:600;cursor:pointer;color:var(--text-muted)">Tốt 80–94%</div>
+          <div style="padding:8px 16px;border-radius:8px;border:1.5px solid var(--border);font-size:13px;font-weight:600;cursor:pointer;color:var(--text-muted)">Dùng được</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="label">Mô tả chi tiết</label>
+        <textarea class="input" rows="4" placeholder="Mô tả tình trạng, lý do bán, thông tin thêm..."></textarea>
+      </div>
+      <!-- AI note -->
+      <div style="background:var(--primary-soft);border-radius:10px;padding:12px 16px;margin-bottom:20px;display:flex;gap:10px;align-items:center">
+        <span style="font-size:20px">🤖</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--primary)">AI sẽ tự động duyệt bài</div>
+          <div style="font-size:12px;color:var(--text-muted)">Hệ thống kiểm tra ảnh và nội dung — thường mất dưới 10 giây</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn-primary" style="flex:1">Đăng tin</button>
+        <button class="btn-secondary">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE: ADMIN -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="admin">
+  <header>
+    <div class="logo">DTU<span style="opacity:.7">2nd</span></div>
+    <div class="header-right"><span style="color:white;font-size:13px">Admin Panel</span><div style="width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:16px">👤</div></div>
+  </header>
+  <div style="max-width:1100px;margin:28px auto;padding:0 24px">
+    <h1 style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin-bottom:20px">Dashboard Admin</h1>
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat"><div class="stat-num">199</div><div class="stat-label">Tổng tin đăng</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--amber)">12</div><div class="stat-label">Chờ duyệt</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--green)">180</div><div class="stat-label">Đã duyệt</div></div>
+      <div class="stat"><div class="stat-num" style="color:var(--red)">7</div><div class="stat-label">Từ chối</div></div>
+    </div>
+    <!-- Flagged posts -->
+    <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:12px">Tin bị AI flag — cần xem lại</h2>
+    <div class="card" style="padding:0;overflow:hidden;margin-bottom:24px">
+      <table>
+        <thead><tr><th>Bài đăng</th><th>Người đăng</th><th>AI phán xét</th><th>Lý do</th><th>Thao tác</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><div style="font-weight:600;font-size:13px">Mình đang ế, ai kết bạn không</div></td>
+            <td style="font-size:13px;color:var(--text-muted)">Nam K23</td>
+            <td><span class="badge badge-red">Không hợp lệ</span></td>
+            <td style="font-size:12px;color:var(--text-muted)">Không phải đồ secondhand</td>
+            <td><div style="display:flex;gap:6px"><button class="btn-success" style="padding:5px 10px;font-size:12px">Duyệt</button><button class="btn-danger" style="padding:5px 10px;font-size:12px">Từ chối</button></div></td>
+          </tr>
+          <tr>
+            <td><div style="font-weight:600;font-size:13px">Dịch vụ giặt ủi giá rẻ KTX</div></td>
+            <td style="font-size:13px;color:var(--text-muted)">Lan K22</td>
+            <td><span class="badge badge-amber">Độ tin 72%</span></td>
+            <td style="font-size:12px;color:var(--text-muted)">Có thể là quảng cáo dịch vụ</td>
+            <td><div style="display:flex;gap:6px"><button class="btn-success" style="padding:5px 10px;font-size:12px">Duyệt</button><button class="btn-danger" style="padding:5px 10px;font-size:12px">Từ chối</button></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Recent posts -->
+    <h2 style="font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:12px">Tin đăng gần đây</h2>
+    <div class="card" style="padding:0;overflow:hidden">
+      <table>
+        <thead><tr><th>Sản phẩm</th><th>Người đăng</th><th>Giá</th><th>AI</th><th>Trạng thái</th></tr></thead>
+        <tbody>
+          <tr><td style="font-size:13px;font-weight:600">Laptop Dell i5 Gen 11</td><td style="font-size:13px;color:var(--text-muted)">An CNTT</td><td style="font-size:13px;color:var(--primary);font-weight:600">8.500.000đ</td><td><span style="font-size:11px;color:#5B3FB5;background:#E8E0FF;padding:2px 7px;border-radius:20px">✅ 96%</span></td><td><span class="badge badge-green">Hiện</span></td></tr>
+          <tr><td style="font-size:13px;font-weight:600">Xe đạp Giant ATX</td><td style="font-size:13px;color:var(--text-muted)">Minh DTU</td><td style="font-size:13px;color:var(--primary);font-weight:600">1.800.000đ</td><td><span style="font-size:11px;color:#5B3FB5;background:#E8E0FF;padding:2px 7px;border-radius:20px">✅ 98%</span></td><td><span class="badge badge-green">Hiện</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE: ABOUT -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="about">
+  <header>
+    <div class="logo">DTU<span style="opacity:.7">2nd</span></div>
+    <div class="header-right"><button class="btn-white">Đăng nhập</button><button class="btn-solid">Đăng ký</button></div>
+  </header>
+  <nav><a>Feed</a><a>Demand</a><a>Quản lý tin</a><a class="active">About</a></nav>
+  <!-- Hero -->
+  <div style="background:var(--primary);padding:64px 24px;text-align:center">
+    <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:36px;color:white;margin-bottom:12px">DTU2nd</div>
+    <p style="color:rgba(255,255,255,0.8);font-size:16px;max-width:500px;margin:0 auto;line-height:1.6">Sàn mua bán đồ secondhand dành riêng cho sinh viên Duy Tân University</p>
+  </div>
+  <div style="max-width:800px;margin:40px auto;padding:0 24px">
+    <!-- Features -->
+    <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin-bottom:20px;text-align:center">Tại sao chọn DTU2nd?</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:40px">
+      <div class="card" style="text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">🤖</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px">AI Kiểm duyệt</div>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.5">Tự động lọc spam và nội dung không liên quan</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">🎓</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px">Chỉ dành cho DTU</div>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.5">Xác minh qua email @duytan.edu.vn</p>
+      </div>
+      <div class="card" style="text-align:center">
+        <div style="font-size:36px;margin-bottom:12px">⚡</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;margin-bottom:8px">Đăng tin nhanh</div>
+        <p style="font-size:13px;color:var(--text-muted);line-height:1.5">AI duyệt trong vài giây, tin lên ngay</p>
+      </div>
+    </div>
+    <!-- Team -->
+    <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin-bottom:20px;text-align:center">Nhóm phát triển</h2>
+    <div style="display:flex;gap:16px;justify-content:center">
+      <div class="card" style="text-align:center;width:160px">
+        <div style="width:60px;height:60px;border-radius:50%;background:var(--primary-soft);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:28px">👤</div>
+        <div style="font-weight:600;font-size:14px">Kiệt</div>
+        <div style="font-size:12px;color:var(--text-muted)">Fullstack Dev</div>
+      </div>
+    </div>
+    <!-- Contact -->
+    <div class="card" style="margin-top:32px;text-align:center;padding:32px">
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:8px">Liên hệ</div>
+      <p style="font-size:14px;color:var(--text-muted)">Email: dtu2nd@duytan.edu.vn</p>
+      <p style="font-size:14px;color:var(--text-muted)">Facebook: DTU Secondhand Market</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE: LOGIN -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="login">
+  <div style="min-height:100vh;display:flex">
+    <!-- Left -->
+    <div style="flex:1;background:var(--primary);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px">
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:40px;color:white;margin-bottom:16px">DTU2nd</div>
+      <p style="color:rgba(255,255,255,0.8);font-size:16px;text-align:center;max-width:280px;line-height:1.6">Sàn mua bán đồ secondhand dành riêng cho sinh viên Duy Tân</p>
+      <div style="margin-top:40px;display:flex;flex-direction:column;gap:12px;width:240px">
+        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px;color:white;font-size:13px">🤖 AI kiểm duyệt tự động</div>
+        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px;color:white;font-size:13px">🎓 Chỉ dành cho sinh viên DTU</div>
+        <div style="background:rgba(255,255,255,0.1);border-radius:10px;padding:12px 16px;color:white;font-size:13px">⚡ Đăng tin trong vài giây</div>
+      </div>
+    </div>
+    <!-- Right -->
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px">
+      <div style="width:100%;max-width:380px">
+        <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;margin-bottom:8px">Đăng nhập</h2>
+        <p style="color:var(--text-muted);font-size:14px;margin-bottom:28px">Dùng email Duy Tân của bạn</p>
+        <div class="form-group">
+          <label class="label">Email @duytan.edu.vn</label>
+          <input class="input" placeholder="username@duytan.edu.vn"/>
+        </div>
+        <div class="form-group">
+          <label class="label">Mật khẩu</label>
+          <input class="input" type="password" placeholder="••••••••"/>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+          <label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer"><input type="checkbox"/> Ghi nhớ đăng nhập</label>
+          <a style="font-size:13px;color:var(--primary);cursor:pointer">Quên mật khẩu?</a>
+        </div>
+        <button class="btn-primary" style="width:100%;padding:12px">Đăng nhập</button>
+        <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--text-muted)">Chưa có tài khoản? <a style="color:var(--primary);font-weight:600;cursor:pointer">Đăng ký ngay</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PAGE: SIGNUP -->
+<!-- ═══════════════════════════════════════════════ -->
+<div class="page" id="signup">
+  <div style="min-height:100vh;display:flex">
+    <!-- Left -->
+    <div style="flex:1;background:var(--primary);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px">
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:40px;color:white;margin-bottom:16px">DTU2nd</div>
+      <p style="color:rgba(255,255,255,0.8);font-size:16px;text-align:center;max-width:280px;line-height:1.6">Tạo tài khoản và bắt đầu mua bán ngay hôm nay</p>
+    </div>
+    <!-- Right -->
+    <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:40px">
+      <div style="width:100%;max-width:380px">
+        <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;margin-bottom:8px">Đăng ký</h2>
+        <p style="color:var(--text-muted);font-size:14px;margin-bottom:28px">Chỉ dành cho sinh viên Duy Tân</p>
+        <div class="form-group">
+          <label class="label">Họ và tên</label>
+          <input class="input" placeholder="Nguyễn Văn A"/>
+        </div>
+        <div class="form-group">
+          <label class="label">Email @duytan.edu.vn *</label>
+          <input class="input" placeholder="username@duytan.edu.vn"/>
+        </div>
+        <div class="form-group">
+          <label class="label">Khoa / Lớp</label>
+          <input class="input" placeholder="VD: CNTT K22"/>
+        </div>
+        <div class="form-group">
+          <label class="label">Mật khẩu</label>
+          <input class="input" type="password" placeholder="Tối thiểu 8 ký tự"/>
+        </div>
+        <div class="form-group">
+          <label class="label">Xác nhận mật khẩu</label>
+          <input class="input" type="password" placeholder="••••••••"/>
+        </div>
+        <div style="background:var(--primary-soft);border-radius:10px;padding:12px;margin-bottom:16px;font-size:12px;color:var(--primary)">
+          🔒 Chỉ email @duytan.edu.vn mới đăng ký được. Thông tin của bạn được bảo mật.
+        </div>
+        <button class="btn-primary" style="width:100%;padding:12px">Tạo tài khoản</button>
+        <p style="text-align:center;margin-top:16px;font-size:14px;color:var(--text-muted)">Đã có tài khoản? <a style="color:var(--primary);font-weight:600;cursor:pointer">Đăng nhập</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+// Show first page
+document.getElementById('demand').classList.add('active');
+document.querySelector('.tab').classList.add('active');
+</script>
+</body>
+</html>
